@@ -1,7 +1,7 @@
 import express from "express";
 import session from "express-session";
 import bodyParser from "body-parser";
-import multer from "multer";
+import cors from "cors";
 import { db } from "./database/db-connection.js";
 import { apiAdminRouter } from "./routes-api/admin-routes.js";
 
@@ -11,7 +11,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(cors());
 app.use(session({secret: 'anfdjkfjdkhfdsdgoyitgj'}));
+app.use("/uploads", express.static("uploads"));
+app.use(express.static("public"));
 
 db.connect((err) => {
   if(err){
@@ -22,8 +25,8 @@ db.connect((err) => {
   }
 });
 
-app.use("/api", apiAdminRouter);
+app.use("/", apiAdminRouter);
 
 app.listen(3000, () => {
-  console.log("Servidor rodando em http://localhost:3000/api");
+  console.log("Servidor rodando em http://localhost:3000");
 });

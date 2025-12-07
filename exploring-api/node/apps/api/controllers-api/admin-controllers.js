@@ -2,7 +2,7 @@ import { db } from "../database/db-connection.js";
 
 export const adminMakeLogin = (req, res) => {
     const { user, password } = req.body;
-    const sql = "SELECT * FROM adminapp WHERE userName = ?";
+    const sql = "SELECT * FROM adminApp WHERE userName = ?";
 
     db.query(sql, [user, password], (err, result) => {
         if(err){
@@ -39,9 +39,11 @@ export const adminMakeLogin = (req, res) => {
 export const adminRegisterUser = (req, res) => {
     const {name, email} = req.body;
     const imageName = req.file.filename;
+    const imgUrl = `http://localhost:3000/uploads/${imageName}`;
+    
     const sql = "INSERT INTO infoUsers (userImg, nome, email) VALUES (?, ?, ?)";
 
-    db.query(sql, [imageName, name, email], (err, result) => {
+    db.query(sql, [imgUrl, name, email], (err, result) => {
         if(err){
             console.error("Erro ao inserir:", err);
             return res.status(500).send(err);

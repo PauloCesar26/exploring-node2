@@ -1,20 +1,18 @@
 import fetch from "node-fetch";
-import FormData from "form-data";
-import fs from "fs";
 
 export const viewLogin = (req, res) => {
-    res.render("admin/login/login", { errorUser: null, errorPassword: null });
+    res.render("admin/src/pages/login/login", { errorUser: null, errorPassword: null });
 }
 
 export const admin = (req, res) => {
-    res.render("admin/index");
+    res.render("admin/src/pages/index");
 }
 
 export const makeLogin = async (req, res) => {
     const { user, password } = req.body;
     
     try{
-        const response = await fetch("http://localhost:3000/api/admin/admin-login", {
+        const response = await fetch("http://localhost:3000/admin/admin-login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user, password })
@@ -50,32 +48,6 @@ export const makeLogin = async (req, res) => {
 export const makeLogout = (req, res) => {
     req.session.destroy();
     res.redirect("/admin");
-}
-
-export const registerUser = async (req, res) => {
-    const form = new FormData();
-    console.log(req.body.name);
-
-    try{
-        form.append("name", req.body.name);
-        form.append("email", req.body.email);
-        form.append("userImg", fs.createReadStream(req.file.path));
-    
-        const response = await fetch("http://localhost:3000/api/admin/register-user", {
-            method: "POST",
-            headers: form.getHeaders(),
-            body: form
-        });
-    
-        const result = await response.json();
-        console.log(result);
-
-        res.redirect("/admin");
-    }
-    catch(error){
-        console.error("Error: ", error);
-        return res.status(500).send("Erro");
-    }
 }
 
 
