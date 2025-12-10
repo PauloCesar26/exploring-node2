@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { db } from "./database/db-connection.js";
 import { apiAdminRouter } from "./routes-api/admin-routes.js";
+import { apiSiteRouter } from "./routes-api/website-routes.js";
 
 const app = express();
 
@@ -25,7 +26,8 @@ db.connect((err) => {
   }
 });
 
-app.use("/", apiAdminRouter);
+app.use("/admin", apiAdminRouter);
+app.use("/site", apiSiteRouter);
 
 app.listen(3000, () => {
   console.log("Servidor rodando em http://localhost:3000");

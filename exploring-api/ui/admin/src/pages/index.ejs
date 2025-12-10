@@ -19,9 +19,9 @@
     <button type="submit">Enter</button>
   </form>
   
-  <a href="/user" target="_blank">Display users</a>
+  <a href="http://localhost:3002" target="_blank">Display users</a>
   <a href="/admin/manage-user">Manage users</a>
-  <a href="/admin/logout">Logout</a>
+  <a href="/logout">Logout</a>
 
   <script>
     const formAdmin = document.getElementById("form-admin");
@@ -36,22 +36,22 @@
       const form = new FormData();
 
       try{
-          form.append("name", name);
-          form.append("email", email);
-          form.append("userImg", file);
-      
-          const response = await fetch("http://localhost:3000/admin/register-user", {
-              method: "POST",
-              body: form
-          });
-      
-          const result = await response.json();
-          console.log(result);
+        form.append("name", name);
+        form.append("email", email);
+        form.append("userImg", file);
+    
+        const response = await fetch("http://localhost:3000/admin/register-user", {
+            method: "POST",
+            body: form
+        });
+    
+        const result = await response.json();
 
-          console.log("Enviado");
+        console.log("Enviado");
+        formAdmin.reset();
       }
       catch(error){
-          console.error("Error: ", error);
+        console.error("Error: ", error);
       }
     })
   </script>
