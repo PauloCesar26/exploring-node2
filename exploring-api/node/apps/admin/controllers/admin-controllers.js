@@ -12,10 +12,10 @@ export const makeLogin = async (req, res) => {
     const { user, password } = req.body;
     
     try{
-        const response = await fetch("http://localhost:3000/admin/admin-login", {
+        const response = await fetch("http://localhost:3000/api/admin/admin-login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ user, password })
+            body: JSON.stringify({ user, password }),
         });
         console.log(response);
         console.log("-------------");
@@ -33,7 +33,7 @@ export const makeLogin = async (req, res) => {
 
         req.session.admin = {
             id: admin.admin.id,
-            name: admin.admin.username
+            name: admin.admin.username,
         };
         console.log("Admin:", req.session.admin);
 
@@ -50,18 +50,20 @@ export const makeLogout = (req, res) => {
     res.redirect("/admin");
 }
 
+export const manageUsers = async (req, res) => {
+    try{
+        const response = await fetch("http://localhost:3000/api/admin/manage-user", {
+            method: "GET",
+        });
+        const result = await response.json();
+        console.log("------ADMIN------");
+        console.log(result);
 
-// export const manageUsers = async (req, res) => {
-//     try{
-//         const response = await fetch("http://localhost:3000/api/admin/manage-users");
-//         const users = await response.json();
-//         console.log(users);
-
-//         res.render("admin/admin-manage/admin-user", {
-//             user: users
-//         });
-//     }
-//     catch(error){
-//         console.error("Error get users: ", error);
-//     }
-// }
+        res.render("admin/src/pages/admin-manage/admin-user", {
+            user: result.user
+        });
+    }
+    catch(error){
+        console.error("Error get users: ", error);
+    }
+}

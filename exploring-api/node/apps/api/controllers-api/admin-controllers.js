@@ -29,7 +29,8 @@ export const adminMakeLogin = (req, res) => {
         res.json({
             admin: {
                 id: admin.id_admin,
-                username: admin.userName
+                username: admin.userName,
+                isLogged: false
             }
         });
         console.log("Admin:", admin.userName);
@@ -53,18 +54,18 @@ export const adminRegisterUser = (req, res) => {
     });
 }
 
-// export const adminManageUsers = (req, res) => {
-//     const sql = "SELECT * FROM infoUsers";
+export const adminManageUsers = (req, res) => {
+    const sql = "SELECT * FROM infoUsers";
 
-//     db.query(sql, (err, result) => {
-//         if(err){
-//             console.error("Erro ao buscar dados: ", err);
-//             return res.status(500).send(err);
-//         }
-//         else{
-//             res.render("admin/admin-manage/admin-user", {
-//                 user: result
-//             });
-//         }
-//     });
-// }
+    db.query(sql, (err, result) => {
+        if(err){
+            console.error("Erro ao buscar dados: ", err);
+            return res.status(500).send(err);
+        }
+        else{
+            res.json({
+                user: result
+            });
+        }
+    });
+}

@@ -2,7 +2,6 @@ import { db } from "../database/db-connection.js";
 
 export const selectUsers = (req, res) => {
     const sql = "SELECT * FROM infoUsers";
-    console.log(sql);
 
     db.query(sql, (err, result) => {
         if(err){

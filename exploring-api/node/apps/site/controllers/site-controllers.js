@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 
 export const displayInfoDb = async (req, res) => {
     try{
-        const response = await fetch("http://localhost:3000/site/select-info", {
+        const response = await fetch("http://localhost:3000/api/site/select-info", {
             method: "GET",
         });
         const result = await response.json();
@@ -13,8 +13,8 @@ export const displayInfoDb = async (req, res) => {
             user: result.user
         });
     }
-    catch{
-        console.error("Error get data");
+    catch(error){
+        console.error("Error get data: ". error);
     }
 }
 

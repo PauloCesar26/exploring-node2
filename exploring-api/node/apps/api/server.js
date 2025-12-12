@@ -13,21 +13,23 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cors());
-app.use(session({secret: 'anfdjkfjdkhfdsdgoyitgj'}));
+app.use(session({
+  secret: 'anfdjkfjdkhfdsdgoyitgj',
+}));
 app.use("/uploads", express.static("uploads"));
 app.use(express.static("public"));
 
 db.connect((err) => {
   if(err){
-  console.error("Erro ao conectar no banco:", err);
+    console.error("Erro ao conectar no banco:", err);
   }
   else{
-  console.log("Conectado ao MySQL.");
+    console.log("Conectado ao MySQL.");
   }
 });
 
-app.use("/admin", apiAdminRouter);
-app.use("/site", apiSiteRouter);
+app.use("/api/admin", apiAdminRouter);
+app.use("/api/site", apiSiteRouter);
 
 app.listen(3000, () => {
   console.log("Servidor rodando em http://localhost:3000");
