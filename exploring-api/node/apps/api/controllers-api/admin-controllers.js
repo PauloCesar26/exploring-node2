@@ -1,6 +1,9 @@
 import { db } from "../database/db-connection.js";
+import jwt from "jsonwebtoken";
 
 export const adminMakeLogin = (req, res) => {
+    const JWT_SECRET = "3913ecc3c31c5f9542ecd7542b15d9df7cb3f0e7a5beb5cc46df9cf4e6979b64";
+
     const { user, password } = req.body;
     const sql = "SELECT * FROM adminApp WHERE userName = ?";
 
@@ -26,14 +29,22 @@ export const adminMakeLogin = (req, res) => {
             });
         }
 
-        res.json({
+        const token = jwt.sign({
+            id: admin.id_admin,
+            userName: admin.userName
+        }, JWT_SECRET, {
+            expiresIn: "10m"
+        });
+
+        res.status(200).json({
             admin: {
                 id: admin.id_admin,
-                username: admin.userName,
-                isLogged: false
+                userName: admin.userName,
+                token: token
             }
         });
         console.log("Admin:", admin.userName);
+        console.log("Token: ", token);
     });
 }
 

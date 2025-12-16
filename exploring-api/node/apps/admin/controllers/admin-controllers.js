@@ -33,10 +33,10 @@ export const makeLogin = async (req, res) => {
 
         req.session.admin = {
             id: admin.admin.id,
-            name: admin.admin.username,
+            name: admin.admin.userName,
+            token: admin.admin.token
         };
         console.log("Admin:", req.session.admin);
-
         return res.redirect("/admin");
     } 
     catch(error){
@@ -54,6 +54,9 @@ export const manageUsers = async (req, res) => {
     try{
         const response = await fetch("http://localhost:3000/api/admin/manage-user", {
             method: "GET",
+            headers: {
+                Authorization:  req.session.admin.token
+            }
         });
         const result = await response.json();
         console.log("------ADMIN------");
