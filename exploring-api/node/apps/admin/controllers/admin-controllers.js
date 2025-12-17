@@ -55,9 +55,14 @@ export const manageUsers = async (req, res) => {
         const response = await fetch("http://localhost:3000/api/admin/manage-user", {
             method: "GET",
             headers: {
-                Authorization:  req.session.admin.token
+                authorization: "Bearer " + req.session.admin.token
             }
         });
+
+        if(!response.ok){
+            console.log("Token inválido ou expirado");
+        }
+
         const result = await response.json();
         console.log("------ADMIN------");
         console.log(result);
@@ -68,5 +73,41 @@ export const manageUsers = async (req, res) => {
     }
     catch(error){
         console.error("Error get users: ", error);
+        res.redirect("/admin/logout");
     }
 }
+
+export const registerUser = async (req, res) => {
+    try {
+        // const {name, email} = req.body;
+        // const formData = new FormData();
+
+        // formData.append("name", name);
+        // formData.append("email", email);
+        // const file = req.files?.userImg || req.file;
+
+        // formData.append(
+        //     "userImg",
+        //     file.data,
+        //     file.name
+        // );
+
+        const response = await fetch("http://localhost:3000/api/admin/register-user", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${req.session.admin.token}`,
+                "Content-Type": req.headers["content-type"]
+            },
+            body: req
+        });
+
+        if (!response.ok) {
+            throw new Error("Token inválido");
+        }
+
+        res.redirect("/admin");
+    } catch (err) {
+        console.error(err);
+        res.redirect("/admin");
+    }
+};

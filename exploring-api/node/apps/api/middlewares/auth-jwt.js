@@ -5,19 +5,21 @@ export function middlewareAuthJwt(req, res, next){
     const tokenHeader = req.headers.authorization;
 
     if(!tokenHeader){
-        return res.status(401).json({ message: "Token ausente" });
-        // return res.redirect("/admin/admin-login");
+        return res.status(401).json({ message: "Token não autorizado" });
     }
 
     const token = tokenHeader.split(" ")[1];
+    console.log("-----AUTHAPI------");
+    console.log(token);
 
     try{
-        req.admin = jwt.verify(token, JWT_SECRET);
-        next();
+        req.adminToken = jwt.verify(token, JWT_SECRET);
+        console.log("Tudo certo");
     }
     catch{
         return res.status(401).json({
             message: "Token inválido"
         });
     }
+    next();
 }

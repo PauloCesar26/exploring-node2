@@ -7,7 +7,7 @@ export const adminMakeLogin = (req, res) => {
     const { user, password } = req.body;
     const sql = "SELECT * FROM adminApp WHERE userName = ?";
 
-    db.query(sql, [user, password], (err, result) => {
+    db.query(sql, [user], (err, result) => {
         if(err){
             console.error("Erro ao buscar user name: ", err);
             return res.status(500).send(err);
@@ -31,7 +31,6 @@ export const adminMakeLogin = (req, res) => {
 
         const token = jwt.sign({
             id: admin.id_admin,
-            userName: admin.userName
         }, JWT_SECRET, {
             expiresIn: "10m"
         });
@@ -44,7 +43,7 @@ export const adminMakeLogin = (req, res) => {
             }
         });
         console.log("Admin:", admin.userName);
-        console.log("Token: ", token);
+        console.log("Token:", token);
     });
 }
 

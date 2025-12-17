@@ -13,9 +13,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cors());
-app.use(session({
-  secret: 'anfdjkfjdkhfdsdgoyitgj',
-}));
 app.use("/uploads", express.static("uploads"));
 app.use(express.static("public"));
 
