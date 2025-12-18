@@ -79,19 +79,6 @@ export const manageUsers = async (req, res) => {
 
 export const registerUser = async (req, res) => {
     try {
-        // const {name, email} = req.body;
-        // const formData = new FormData();
-
-        // formData.append("name", name);
-        // formData.append("email", email);
-        // const file = req.files?.userImg || req.file;
-
-        // formData.append(
-        //     "userImg",
-        //     file.data,
-        //     file.name
-        // );
-
         const response = await fetch("http://localhost:3000/api/admin/register-user", {
             method: "POST",
             headers: {
@@ -106,8 +93,33 @@ export const registerUser = async (req, res) => {
         }
 
         res.redirect("/admin");
-    } catch (err) {
+    } 
+    catch(err){
         console.error(err);
         res.redirect("/admin");
     }
 };
+
+export const deleteUser = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/admin/manage-user/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${req.session.admin.token}`,
+                "Content-Type": req.headers["content-type"]
+            },
+        });
+
+        if(!response.ok){
+            console.log("Error delete user");
+        }
+
+        res.redirect("/admin/manage-user");
+    }
+    catch(err){
+        console.error(err);
+        res.redirect("/admin/manage-user");
+    }
+}

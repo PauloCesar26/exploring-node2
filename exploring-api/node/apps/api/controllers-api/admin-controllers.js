@@ -79,3 +79,16 @@ export const adminManageUsers = (req, res) => {
         }
     });
 }
+
+export const adminDeleteUser = (req, res) => {
+    const { id } = req.params;
+
+    db.query("DELETE FROM infoUsers WHERE id = ?", [id], (err, result) => {
+        if(err){
+            console.error("Erro ao buscar dados: ", err);
+        }
+        else{
+            res.status(200).json({message: "User deleted"});
+        }
+    });
+}

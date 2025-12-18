@@ -11,11 +11,11 @@
        <% console.log(user) %>
       <% user.forEach(users => { %>
         <div>
-          <!-- <form action="/manage-user/delete/<%= users.id %>" method="post"> -->
+          <form action="/admin/manage-user/<%= users.id %>" method="POST">
             <img src="<%= users.userImg %>" width="100" height="100">
             <%= users.nome %> - <%= users.email %>
-            <!-- <button>Delete</button> -->
-          <!-- </form> -->
+            <button>Delete</button>
+          </form>
         </div>
       <% }) %>
     <% } else { %>
