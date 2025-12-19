@@ -32,7 +32,7 @@ export const adminMakeLogin = (req, res) => {
         const token = jwt.sign({
             id: admin.id_admin,
         }, JWT_SECRET, {
-            expiresIn: "10m"
+            expiresIn: "1m"
         });
 
         res.status(200).json({

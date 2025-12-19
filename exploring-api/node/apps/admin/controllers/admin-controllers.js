@@ -47,7 +47,7 @@ export const makeLogin = async (req, res) => {
 
 export const makeLogout = (req, res) => {
     req.session.destroy();
-    res.redirect("/admin");
+    res.redirect("/admin/login");
 }
 
 export const manageUsers = async (req, res) => {
@@ -55,12 +55,14 @@ export const manageUsers = async (req, res) => {
         const response = await fetch("http://localhost:3000/api/admin/manage-user", {
             method: "GET",
             headers: {
-                authorization: "Bearer " + req.session.admin.token
+                authorization: "Bearer " + req.session.admin.token,
+                "Content-Type": req.headers["content-type"]
             }
         });
 
-        if(!response.ok){
+        if(response.status === 401){
             console.log("Token inválido ou expirado");
+            res.redirect("/admin/logout");
         }
 
         const result = await response.json();
@@ -88,8 +90,9 @@ export const registerUser = async (req, res) => {
             body: req
         });
 
-        if (!response.ok) {
-            throw new Error("Token inválido");
+        if(response.status === 401){
+            console.log("Token inválido");
+            res.redirect("/admin/logout");
         }
 
         res.redirect("/admin");
@@ -112,8 +115,9 @@ export const deleteUser = async (req, res) => {
             },
         });
 
-        if(!response.ok){
+        if(response.status === 401){
             console.log("Error delete user");
+            res.redirect("/admin/logout");
         }
 
         res.redirect("/admin/manage-user");
