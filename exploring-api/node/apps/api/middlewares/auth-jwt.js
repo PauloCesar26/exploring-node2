@@ -15,11 +15,11 @@ export function middlewareAuthJwt(req, res, next){
     try{
         req.adminToken = jwt.verify(token, JWT_SECRET);
         console.log("Tudo certo");
+        next();
     }
     catch{
         return res.status(401).json({
             message: "Token inválido"
         });
     }
-    next();
 }

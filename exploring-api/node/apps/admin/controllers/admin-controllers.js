@@ -46,23 +46,27 @@ export const makeLogin = async (req, res) => {
 }
 
 export const makeLogout = (req, res) => {
-    req.session.destroy();
-    res.redirect("/admin/login");
+    req.session.destroy(() => {
+        res.redirect("/admin/login");
+    });
 }
 
 export const manageUsers = async (req, res) => {
     try{
+        if(!req.session.admin){
+            return res.redirect("/admin/admin-login");
+        }
+
         const response = await fetch("http://localhost:3000/api/admin/manage-user", {
             method: "GET",
             headers: {
                 authorization: "Bearer " + req.session.admin.token,
-                "Content-Type": req.headers["content-type"]
             }
         });
 
         if(response.status === 401){
             console.log("Token inválido ou expirado");
-            res.redirect("/admin/logout");
+            return res.redirect("/admin/admin-login");
         }
 
         const result = await response.json();
@@ -81,10 +85,14 @@ export const manageUsers = async (req, res) => {
 
 export const registerUser = async (req, res) => {
     try {
+        if(!req.session.admin){
+            return res.redirect("/admin/admin-login");
+        }
+
         const response = await fetch("http://localhost:3000/api/admin/register-user", {
             method: "POST",
             headers: {
-                Authorization: `Bearer ${req.session.admin.token}`,
+                authorization: `Bearer ${req.session.admin.token}`,
                 "Content-Type": req.headers["content-type"]
             },
             body: req
@@ -92,7 +100,7 @@ export const registerUser = async (req, res) => {
 
         if(response.status === 401){
             console.log("Token inválido");
-            res.redirect("/admin/logout");
+            return res.redirect("/admin/admin-login");
         }
 
         res.redirect("/admin");
@@ -107,17 +115,20 @@ export const deleteUser = async (req, res) => {
     const { id } = req.params;
 
     try {
+        if(!req.session.admin){
+            return res.redirect("/admin/admin-login");
+        }
+
         const response = await fetch(`http://localhost:3000/api/admin/manage-user/${id}`, {
             method: "DELETE",
             headers: {
-                Authorization: `Bearer ${req.session.admin.token}`,
-                "Content-Type": req.headers["content-type"]
+                authorization: `Bearer ${req.session.admin.token}`,
             },
         });
 
         if(response.status === 401){
             console.log("Error delete user");
-            res.redirect("/admin/logout");
+            return res.redirect("/admin/admin-login");
         }
 
         res.redirect("/admin/manage-user");
