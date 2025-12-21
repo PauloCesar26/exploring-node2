@@ -83,6 +83,10 @@ export const manageUsers = async (req, res) => {
     }
 }
 
+export const registerView = (req, res) => {
+    res.render("admin/src/pages/register-info/register");
+}
+
 export const registerUser = async (req, res) => {
     try {
         if(!req.session.admin){
@@ -103,11 +107,11 @@ export const registerUser = async (req, res) => {
             return res.redirect("/admin/admin-login");
         }
 
-        res.redirect("/admin");
+        res.redirect("/admin/register-info");
     } 
     catch(err){
         console.error(err);
-        res.redirect("/admin");
+        res.redirect("/admin/register-info");
     }
 };
 
