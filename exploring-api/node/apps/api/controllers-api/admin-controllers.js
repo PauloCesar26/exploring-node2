@@ -32,7 +32,7 @@ export const adminMakeLogin = (req, res) => {
         const token = jwt.sign({
             id: admin.id_admin,
         }, JWT_SECRET, {
-            expiresIn: "1m"
+            expiresIn: "15m"
         });
 
         res.status(200).json({
@@ -48,13 +48,13 @@ export const adminMakeLogin = (req, res) => {
 }
 
 export const adminRegisterUser = (req, res) => {
-    const {name, email} = req.body;
+    const { name, email, slug } = req.body;
     const imageName = req.file.filename;
     const imgUrl = `http://localhost:3000/uploads/${imageName}`;
     
-    const sql = "INSERT INTO infoUsers (userImg, nome, email) VALUES (?, ?, ?)";
+    const sql = "INSERT INTO infoUsers (userImg, nome, email, slug) VALUES (?, ?, ?, ?)";
 
-    db.query(sql, [imgUrl, name, email], (err, result) => {
+    db.query(sql, [imgUrl, name, email, slug], (err, result) => {
         if(err){
             console.error("Erro ao inserir:", err);
             return res.status(500).send(err);

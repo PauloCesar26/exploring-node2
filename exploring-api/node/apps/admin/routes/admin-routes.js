@@ -1,5 +1,15 @@
 import express from "express";
-import { admin, viewLogin, makeLogin, makeLogout, manageUsers, registerUser, deleteUser, registerView } from "../controllers/admin-controllers.js";
+import { 
+    admin, 
+    viewLogin, 
+    makeLogin, 
+    makeLogout, 
+    manageUsers, 
+    registerUser, 
+    deleteUser, 
+    registerView,
+    viewPost
+} from "../controllers/admin-controllers.js";
 import { middlewareAuthAdmin } from "../middlewares/middleware-auth.js";
 
 export const adminRouter = express.Router();
@@ -12,3 +22,4 @@ adminRouter.get("/manage-user", middlewareAuthAdmin, manageUsers);
 adminRouter.get("/register-info", middlewareAuthAdmin, registerView);
 adminRouter.post("/register-user", middlewareAuthAdmin, registerUser);
 adminRouter.post("/manage-user/:id", deleteUser);
+adminRouter.get("/post", middlewareAuthAdmin, viewPost);

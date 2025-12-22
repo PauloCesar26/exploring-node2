@@ -8,6 +8,14 @@ export const admin = (req, res) => {
     res.render("admin/src/pages/index");
 }
 
+export const registerView = (req, res) => {
+    res.render("admin/src/pages/register-info/register");
+}
+
+export const viewPost = (req, res) => {
+    res.render("admin/src/pages/send-post/post");
+}
+
 export const makeLogin = async (req, res) => {
     const { user, password } = req.body;
     
@@ -81,10 +89,6 @@ export const manageUsers = async (req, res) => {
         console.error("Error get users: ", error);
         res.redirect("/admin/logout");
     }
-}
-
-export const registerView = (req, res) => {
-    res.render("admin/src/pages/register-info/register");
 }
 
 export const registerUser = async (req, res) => {
