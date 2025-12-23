@@ -16,6 +16,18 @@ userPassword varchar(50),
 PRIMARY KEY(id_admin)
 );
 
+create table content_post(
+id_post int auto_increment,
+id_card int,
+type_content varchar(50),
+content text,
+position_content int,
+PRIMARY KEY(id_post),
+FOREIGN KEY (id_card) REFERENCES infoUsers(id)
+);
+
+ALTER TABLE infoUsers ADD COLUMN slug varchar(100);
+
 INSERT INTO adminApp (userName, userPassword)
 VALUES ('paulo', '123456');
 
