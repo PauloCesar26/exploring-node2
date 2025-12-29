@@ -8,15 +8,13 @@
   <h2>Send post info</h2>
   
   <form id="form-admin" action="/admin/send-info-post" method="POST" enctype="multipart/form-data">
-    <p>
-      Types de conteudo:<br>
-      title<br>
-      text<br>
-      image
-    </p>
-
     <label>Type do conteudo:</label>
-    <input id="type-content" type="text" name="type-content" required><br><br>
+    <select name="type-content" id="">
+      <option value="">Selecione</option>
+      <option value="title">Title</option>
+      <option value="text">Text</option>
+      <option value="image">Image</option>
+    </select><br><br>
     
     <label>Content:</label>
     <input id="content-post" type="text" name="content-post" required><br><br>

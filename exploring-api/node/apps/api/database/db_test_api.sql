@@ -6,6 +6,7 @@ id int AUTO_INCREMENT,
 userImg varchar(255),
 nome varchar(100),
 email varchar(100),
+slug varchar(100),
 primary key(id)
 );
 
