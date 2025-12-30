@@ -8,7 +8,8 @@ import {
     registerUser, 
     deleteUser, 
     registerView,
-    viewPost
+    viewPost,
+    createContentPost
 } from "../controllers/admin-controllers.js";
 import { middlewareAuthAdmin } from "../middlewares/middleware-auth.js";
 
@@ -22,4 +23,5 @@ adminRouter.get("/manage-user", middlewareAuthAdmin, manageUsers);
 adminRouter.get("/register-info", middlewareAuthAdmin, registerView);
 adminRouter.post("/register-user", middlewareAuthAdmin, registerUser);
 adminRouter.post("/manage-user/:id", deleteUser);
-adminRouter.get("/post", middlewareAuthAdmin, viewPost);
+adminRouter.get("/post/:postId/content", middlewareAuthAdmin, viewPost);
+adminRouter.post("/post/:postId/content", middlewareAuthAdmin, createContentPost);

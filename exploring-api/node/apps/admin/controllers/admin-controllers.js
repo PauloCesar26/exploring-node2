@@ -13,7 +13,9 @@ export const registerView = (req, res) => {
 }
 
 export const viewPost = (req, res) => {
-    res.render("admin/src/pages/send-post/post");
+    const { postId } = req.params;
+
+    res.render("admin/src/pages/send-post/post", { postId });
 }
 
 export const makeLogin = async (req, res) => {
@@ -106,12 +108,14 @@ export const registerUser = async (req, res) => {
             body: req
         });
 
+        const data = await response.json();
+
         if(response.status === 401){
             console.log("Token inválido");
             return res.redirect("/admin/admin-login");
         }
 
-        res.redirect("/admin/register-info");
+        res.redirect(`/admin/post/${data.postId}/content`);
     } 
     catch(err){
         console.error(err);
@@ -144,5 +148,31 @@ export const deleteUser = async (req, res) => {
     catch(err){
         console.error(err);
         res.redirect("/admin/manage-user");
+    }
+}
+
+export const createContentPost = async (req, res) => {
+    const { postId } = req.params;
+    const { type, content, position } = req.body;
+
+    try{
+        await fetch(`http://localhost:3000/api/admin/post/${postId}/content`, {
+            method: "POST",
+            headers: {
+                authorization: `Bearer ${req.session.admin.token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                type,
+                content,
+                position
+            })
+        });
+
+        res.redirect(`/admin/post/${postId}/content`);
+    }
+    catch{
+        console.error("Error ao enviar para a API: ", err);
+        res.redirect(`/admin/post/${postId}/content`);
     }
 }

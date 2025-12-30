@@ -7,9 +7,9 @@
 <body>
   <h2>Send post info</h2>
   
-  <form id="form-admin" action="/admin/send-info-post" method="POST" enctype="multipart/form-data">
+  <form id="form-admin" action="/admin/post/<%= postId %>/content" method="POST">
     <label>Type do conteudo:</label>
-    <select name="type-content" id="">
+    <select name="type" id="">
       <option value="">Selecione</option>
       <option value="title">Title</option>
       <option value="text">Text</option>
@@ -17,10 +17,10 @@
     </select><br><br>
     
     <label>Content:</label>
-    <input id="content-post" type="text" name="content-post" required><br><br>
+    <input id="content" type="text" name="content" required><br><br>
     
     <label>Position:</label>
-    <input id="position-post" type="number" name="position-post" required><br><br>
+    <input id="position" type="number" name="position" required><br><br>
     
     <button type="submit">Enter</button>
   </form>

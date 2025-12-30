@@ -34,5 +34,6 @@ VALUES ('paulo', '123456');
 
 SELECT * FROM infoUsers;
 SELECT * FROM adminApp;
+SELECT * FROM content_post;
 
 DROP TABLE infoUsers;

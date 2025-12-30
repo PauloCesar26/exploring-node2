@@ -57,10 +57,13 @@ export const adminRegisterUser = (req, res) => {
     db.query(sql, [imgUrl, name, email, slug], (err, result) => {
         if(err){
             console.error("Erro ao inserir:", err);
-            return res.status(500).send(err);
+            return res.status(500).json({ error: "Erro ao criar post" });
         }
 
-        res.json({ message: "Usuário cadastrado com sucesso" });
+        return res.status(201).json({
+            message: "Post criado com sucesso",
+            postId: result.insertId
+        });
     });
 }
 
@@ -89,6 +92,23 @@ export const adminDeleteUser = (req, res) => {
         }
         else{
             res.status(200).json({message: "User deleted"});
+        }
+    });
+}
+
+export const adminCreateContentPost = (req, res) => {
+    const { postId } = req.params;
+    const { type, content, position } = req.body;
+    
+    const sql = "INSERT INTO content_post (id_card, type_content, content, position_content) VALUES (?, ?, ?, ?)";
+
+    db.query(sql, [postId, type, content, position], (err) => {
+        if(err){
+            console.error("Error ao enviar conteudo do post: ", err);
+            return res.status(500).json({ error: "Erro ao mandar content do post" });
+        }
+        else{
+            res.status(201).json({ message: "Content salvo com sucesso" });
         }
     });
 }
