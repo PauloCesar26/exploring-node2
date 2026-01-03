@@ -2,7 +2,7 @@ import { db } from "../database/db-connection.js";
 import jwt from "jsonwebtoken";
 
 export const adminMakeLogin = (req, res) => {
-    const JWT_SECRET = "3913ecc3c31c5f9542ecd7542b15d9df7cb3f0e7a5beb5cc46df9cf4e6979b64";
+    const JWT_SECRET = process.env.JWT_SECRET;
 
     const { user, password } = req.body;
     const sql = "SELECT * FROM adminApp WHERE userName = ?";

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export function middlewareAuthJwt(req, res, next){
-    const JWT_SECRET = "3913ecc3c31c5f9542ecd7542b15d9df7cb3f0e7a5beb5cc46df9cf4e6979b64";
+    const JWT_SECRET = process.env.JWT_SECRET;
     const tokenHeader = req.headers.authorization;
 
     if(!tokenHeader){
@@ -14,7 +14,7 @@ export function middlewareAuthJwt(req, res, next){
 
     try{
         req.adminToken = jwt.verify(token, JWT_SECRET);
-        console.log("Tudo certo");
+        console.log("--All right--");
         next();
     }
     catch{

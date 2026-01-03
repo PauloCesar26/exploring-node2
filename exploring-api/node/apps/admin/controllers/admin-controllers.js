@@ -57,7 +57,7 @@ export const makeLogin = async (req, res) => {
 
 export const makeLogout = (req, res) => {
     req.session.destroy(() => {
-        res.redirect("/admin/login");
+        res.redirect("/admin/admin-login");
     });
 }
 
