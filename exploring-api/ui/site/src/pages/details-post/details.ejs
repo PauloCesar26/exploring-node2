@@ -15,6 +15,10 @@
     <% if (c.type_content === 'text') { %>
       <p><%= c.content %></p>
     <% } %>
+
+    <% if (c.type_content === 'image') { %>
+      <img src="<%= c.image %>" width="500" height="300">
+    <% } %>
   <% }) %>
 
   <a href="/">Voltar</a>

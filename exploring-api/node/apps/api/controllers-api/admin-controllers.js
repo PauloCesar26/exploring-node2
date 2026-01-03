@@ -99,10 +99,19 @@ export const adminDeleteUser = (req, res) => {
 export const adminCreateContentPost = (req, res) => {
     const { postId } = req.params;
     const { type, content, position } = req.body;
-    
-    const sql = "INSERT INTO content_post (id_card, type_content, content, position_content) VALUES (?, ?, ?, ?)";
+    const imageName = req.file ? req.file.filename : null;
+    const imgUrl = `http://localhost:3000/uploads-content/${imageName}`;
 
-    db.query(sql, [postId, type, content, position], (err) => {
+    if(type === "image" && !imageName){
+        return res.status(400).json({ error: "Imagem obrigatoria" });
+    }
+    if((type === "text" || type === "title") && !content){
+        return res.status(400).json({ error: "Text or title obrigatorio" });
+    }
+    
+    const sql = "INSERT INTO content_post (id_card, type_content, content, position_content, image) VALUES (?, ?, ?, ?, ?)";
+
+    db.query(sql, [postId, type, content || null, position, imgUrl], (err) => {
         if(err){
             console.error("Error ao enviar conteudo do post: ", err);
             return res.status(500).json({ error: "Erro ao mandar content do post" });

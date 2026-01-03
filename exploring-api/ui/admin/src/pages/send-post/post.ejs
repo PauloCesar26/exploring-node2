@@ -7,21 +7,21 @@
 <body>
   <h2>Send post info</h2>
   
-  <form id="form-admin" action="/admin/post/<%= postId %>/content" method="POST">
+  <form id="form-admin" action="/admin/post/<%= postId %>/content" method="POST" enctype="multipart/form-data">
     <label>Type do conteudo:</label>
-    <select name="type" id="selectTypeContent">
-      <option value="">Selecione</option>
+    <select name="type" id="selectTypeContent" required>
       <option value="title">Title</option>
       <option value="text">Text</option>
       <option value="image">Image</option>
     </select><br><br>
     
-    <label>Content:</label>
     <div class="" id="simple-content">
-      <input id="content" type="text" name="content" required><br><br>
+      <label>Content:</label>
+      <input id="content" type="text" name="content"><br><br>
     </div>
 
     <div class="" id="image-content">
+      <label>Imagem:</label>
       <input id="file" type="file" name="image"><br><br>
     </div>
     

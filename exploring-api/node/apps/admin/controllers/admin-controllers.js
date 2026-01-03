@@ -153,20 +153,20 @@ export const deleteUser = async (req, res) => {
 
 export const createContentPost = async (req, res) => {
     const { postId } = req.params;
-    const { type, content, position } = req.body;
+    // const { type, content, position } = req.body;
 
     try{
+        if(!req.session.admin){
+            return res.redirect("/admin/admin-login");
+        }
+
         await fetch(`http://localhost:3000/api/admin/post/${postId}/content`, {
             method: "POST",
             headers: {
                 authorization: `Bearer ${req.session.admin.token}`,
-                "Content-Type": "application/json"
+                "Content-Type": req.headers["content-type"]
             },
-            body: JSON.stringify({
-                type,
-                content,
-                position
-            })
+            body: req
         });
 
         res.redirect(`/admin/post/${postId}/content`);
