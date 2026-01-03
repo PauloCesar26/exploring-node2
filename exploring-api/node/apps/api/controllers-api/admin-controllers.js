@@ -88,7 +88,7 @@ export const adminDeleteUser = (req, res) => {
 
     db.query("DELETE FROM infoUsers WHERE id = ?", [id], (err, result) => {
         if(err){
-            console.error("Erro ao buscar dados: ", err);
+            console.error("Erro ao deletar: ", err);
         }
         else{
             res.status(200).json({message: "User deleted"});

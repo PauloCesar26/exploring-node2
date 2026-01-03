@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuários Cadastrados</title>
+</head>
+<body>
+  <h1><%= post.nome %></h1>
+
+  <% content.forEach(c => { %>
+    <% if (c.type_content === 'title') { %>
+      <p><%= c.content %></p>
+    <% } %>
+
+    <% if (c.type_content === 'text') { %>
+      <p><%= c.content %></p>
+    <% } %>
+  <% }) %>
+
+  <a href="/">Voltar</a>
+</body>
+</html>

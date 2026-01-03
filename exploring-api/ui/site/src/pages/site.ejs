@@ -13,7 +13,7 @@
         <div>
           <img src="<%= users.userImg %>" width="100" height="100">
           <%= users.nome %> - <%= users.email %>
-          <button>Details</button>
+          <a href="/post/<%= users.id %>">Detalhes</a>
         </div>
       <% }) %>
     <% } else { %>

@@ -13,8 +13,9 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(cors());
-app.use("/uploads", express.static("uploads"));
 app.use(express.static("public"));
+app.use("/uploads", express.static("uploads"));
+app.use("/uploads-content", express.static("uploads-content"));
 
 db.connect((err) => {
   if(err){

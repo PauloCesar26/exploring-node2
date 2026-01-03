@@ -9,7 +9,7 @@
   
   <form id="form-admin" action="/admin/post/<%= postId %>/content" method="POST">
     <label>Type do conteudo:</label>
-    <select name="type" id="">
+    <select name="type" id="selectTypeContent">
       <option value="">Selecione</option>
       <option value="title">Title</option>
       <option value="text">Text</option>
@@ -17,7 +17,13 @@
     </select><br><br>
     
     <label>Content:</label>
-    <input id="content" type="text" name="content" required><br><br>
+    <div class="" id="simple-content">
+      <input id="content" type="text" name="content" required><br><br>
+    </div>
+
+    <div class="" id="image-content">
+      <input id="file" type="file" name="image"><br><br>
+    </div>
     
     <label>Position:</label>
     <input id="position" type="number" name="position" required><br><br>
@@ -25,6 +31,27 @@
     <button type="submit">Enter</button>
   </form>
   
-    <a href="/admin">Voltar</a>
+  <a href="/admin">Voltar</a>
+
+  <script>
+    const selectTypeContent = document.getElementById("selectTypeContent");
+    const simpleContent = document.getElementById("simple-content");
+    const imageContent = document.getElementById("image-content");
+
+    imageContent.style.display = "none";
+
+    selectTypeContent.addEventListener("change", () => {
+      const valueSelect = selectTypeContent.value;
+
+      if(valueSelect === "image"){
+        simpleContent.style.display = "none";
+        imageContent.style.display = "block";
+      }
+      else{
+        simpleContent.style.display = "block";
+        imageContent.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>

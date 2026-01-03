@@ -24,10 +24,11 @@ type_content varchar(50),
 content text,
 position_content int,
 PRIMARY KEY(id_post),
-FOREIGN KEY (id_card) REFERENCES infoUsers(id)
+FOREIGN KEY (id_card) REFERENCES infoUsers(id) ON DELETE CASCADE
 );
 
 ALTER TABLE infoUsers ADD COLUMN slug varchar(100);
+ALTER TABLE content_post ADD COLUMN image varchar(255);
 
 INSERT INTO adminApp (userName, userPassword)
 VALUES ('paulo', '123456');
@@ -37,3 +38,4 @@ SELECT * FROM adminApp;
 SELECT * FROM content_post;
 
 DROP TABLE infoUsers;
+DROP TABLE content_post;
