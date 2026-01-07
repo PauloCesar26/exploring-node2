@@ -13,7 +13,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 console.log("Diretório atual (__dirname):", __dirname);
-
+app.use(express.static(path.join(__dirname, "../../../ui/admin/public")));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
