@@ -11,7 +11,7 @@ const app = express();
 
 console.log("Diretório atual (__dirname):", __dirname);
 
-app.use("/uploads", express.static(path.join(__dirname, "../../../ui/site/public/uploads/")));
+app.use(express.static(path.join(__dirname, "../../../ui/site/public")));
 app.use(express.json());
 
 app.set("view engine", "ejs");
