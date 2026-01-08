@@ -4,28 +4,27 @@
   <meta charset="UTF-8">
   <title>Cadastro</title>
   <link href="/output.css" rel="stylesheet">
-  <style>
-    #nav{
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: fixed;
-      top: 0px;
-      left: 0px;
-      background-color: rgb(214, 214, 214);
-      height: 100vh;
-      padding: 10px;
-    }
-  </style>
 </head>
 <body>
-  <nav>
-    <div id="nav" class="text-black">
-      <a href="http://localhost:3002" target="_blank">Display users</a>
-      <a href="/admin/register-info">Send info db</a>
-      <a href="/admin/manage-user">Manage users</a>
-      <a href="/admin/logout">Logout</a>
+  <div class="h-screen flex flex-col">
+    <div class="flex flex-1">
+      <aside class="w-64 bg-zinc-800 text-white">
+        <div class="flex flex-col gap-3 p-6">
+          <a href="http://localhost:3002" target="_blank">Display users</a>
+          <a href="/admin/register-info">Send info db</a>
+          <a href="/admin/manage-user">Manage users</a>
+          <a href="/admin/logout">Logout</a>
+        </div>
+      </aside>
+  
+      <main class="flex-1 p-6">
+        Admin
+      </main>
     </div>
-  </nav>
+  
+    <footer class="p-6 bg-zinc-500">
+      footer
+    </footer>
+  </div>
 </body>
 </html>
