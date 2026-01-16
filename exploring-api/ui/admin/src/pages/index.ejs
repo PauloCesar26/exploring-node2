@@ -8,23 +8,14 @@
 <body>
   <div class="h-screen flex flex-col">
     <div class="flex flex-1">
-      <aside class="w-64 bg-zinc-800 text-white">
-        <div class="flex flex-col gap-3 p-6">
-          <a href="http://localhost:3002" target="_blank">Display users</a>
-          <a href="/admin/register-info">Send info db</a>
-          <a href="/admin/manage-user">Manage users</a>
-          <a href="/admin/logout">Logout</a>
-        </div>
-      </aside>
+      <%- include("./includes/sidebar.ejs"); %>
   
       <main class="flex-1 p-6">
         Admin
       </main>
     </div>
   
-    <footer class="p-6 bg-zinc-500">
-      footer
-    </footer>
+    <%- include("./includes/footer.ejs"); %>
   </div>
 </body>
 </html>

@@ -3,25 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <title>Cadastro</title>
+  <link href="/output.css" rel="stylesheet">
+  <style>
+    input{
+      border: 1px solid black;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <h2>Cadastro de Usuário</h2>
-  <form id="form-admin" action="/admin/register-user" method="POST" enctype="multipart/form-data">
-    <label>Imagem do user</label><br>
-    <input id="file" type="file" name="userImg" required><br><br>
-    
-    <label>Nome:</label>
-    <input id="name" type="text" name="name" required><br><br>
-    
-    <label>Email:</label>
-    <input id="email" type="email" name="email" required><br><br>
-
-    <label>Nome de identificação para esse post:</label>
-    <input id="slug" type="text" name="slug" required><br><br>
-    
-    <button type="submit">Enter</button>
-  </form>
+  <div class="h-screen flex flex-col">
+    <div class="flex flex-1">
+      <%- include("../includes/sidebar.ejs"); %>
   
-    <a href="/admin">Voltar</a>
+      <main class="flex-1 p-6">
+        <h2 class="text-2xl mb-5">Cadastro de Usuário</h2>
+
+        <form id="form-admin" action="/admin/register-user" method="POST" enctype="multipart/form-data">
+          <label>Imagem do user:</label><br>
+          <input id="file" type="file" name="userImg" required><br><br>
+          
+          <label>Nome:</label>
+          <input id="name" type="text" name="name" required><br><br>
+          
+          <label>Email:</label>
+          <input id="email" type="email" name="email" required><br><br>
+
+          <label>Nome de identificação para esse post:</label>
+          <input id="slug" type="text" name="slug" required><br><br>
+          
+          <button type="submit" class="bg-blue-600 p-3 bg-radial">Enter</button>
+        </form>
+      </main>
+    </div>
+  
+    <%- include("../includes/footer.ejs"); %>
+  </div>
 </body>
 </html>
