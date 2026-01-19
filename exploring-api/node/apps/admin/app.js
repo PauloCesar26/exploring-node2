@@ -21,7 +21,7 @@ app.use(session({
 }));
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "../../../ui"));
+app.set("views", path.join(__dirname, "../../../ui/"));
 
 app.use("/admin", adminRouter);
 

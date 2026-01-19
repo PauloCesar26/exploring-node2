@@ -23,9 +23,9 @@ export const adminMakeLogin = (req, res) => {
         const admin = result[0];
         
         if(password !== admin.userPassword){
-            return res.render("admin/login/login", { 
+            return res.status(400).json({
                 errorUser: null,
-                errorPassword: "Invalid password, please try again" 
+                errorPassword: "Invalid password"
             });
         }
 
