@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Cadastro</title>
+  <title>Admin</title>
   <link href="/output.css" rel="stylesheet">
   <style>
     input{
@@ -19,21 +19,25 @@
       <main class="flex-1 p-6">
         <h2 class="text-2xl mb-5">Cadastro de Usuário</h2>
 
-        <form id="form-admin" action="/admin/register-user" method="POST" enctype="multipart/form-data">
-          <label>Imagem do user:</label><br>
-          <input id="file" type="file" name="userImg" required><br><br>
-          
-          <label>Nome:</label>
-          <input id="name" type="text" name="name" required><br><br>
-          
-          <label>Email:</label>
-          <input id="email" type="email" name="email" required><br><br>
-
-          <label>Nome de identificação para esse post:</label>
-          <input id="slug" type="text" name="slug" required><br><br>
-          
-          <button type="submit" class="bg-blue-600 p-3 bg-radial">Enter</button>
-        </form>
+        <div class="bg-zinc-200 p-2 rounded-2xl">
+          <form id="form-admin" action="/admin/register-user" method="POST" enctype="multipart/form-data">
+            <label>Imagem do user:</label><br>
+            <input id="file" type="file" name="userImg" required><br><br>
+            
+            <label>Nome:</label>
+            <input id="name" type="text" name="name" required><br><br>
+            
+            <label>Email:</label>
+            <input id="email" type="email" name="email" required><br><br>
+  
+            <label>Nome de identificação para esse post:</label>
+            <input id="slug" type="text" name="slug" required><br><br>
+            
+            <button type="submit" class="h-10 p-3 bg-zinc-500 text-white font-medium rounded-lg hover:opacity-90 transition-all shadow-lg hover:shadow-xl flex items-center justify-center cursor-pointer">
+              Enter
+            </button>
+          </form>
+        </div>
       </main>
     </div>
   
