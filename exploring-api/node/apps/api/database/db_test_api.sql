@@ -23,6 +23,7 @@ id_card int,
 type_content varchar(50),
 content text,
 position_content int,
+image varchar(255),
 PRIMARY KEY(id_post),
 FOREIGN KEY (id_card) REFERENCES infoUsers(id) ON DELETE CASCADE
 );
