@@ -28,9 +28,6 @@ PRIMARY KEY(id_post),
 FOREIGN KEY (id_card) REFERENCES infoUsers(id) ON DELETE CASCADE
 );
 
-ALTER TABLE infoUsers ADD COLUMN slug varchar(100);
-ALTER TABLE content_post ADD COLUMN image varchar(255);
-
 INSERT INTO adminApp (userName, userPassword)
 VALUES ('paulo', '123456');
 
